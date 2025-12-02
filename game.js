@@ -303,7 +303,7 @@ function startColorMatching() {
     const currentColor = currentBrand.colors[gameState.currentColorIndex];
     
     // 제목 업데이트
-    gameElements.currentColorTitle.textContent = `${currentColor.name} 맞추기 (${gameState.currentColorIndex + 1}/${currentBrand.colors.length})`;
+    gameElements.currentColorTitle.textContent = `색상 ${gameState.currentColorIndex + 1} 맞추기 (${currentBrand.colors.length}개 중)`;
     
     // 4개 색상 옵션 생성 (정답 1개 + 유사색 3개)
     generateColorOptions(currentColor);
