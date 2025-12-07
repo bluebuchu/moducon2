@@ -20,35 +20,70 @@
     
     <div class="container">
         <!-- 시작 화면 -->
-        <div id="startScreen" class="screen active">
-            <h1 class="title">모두콘 게임 V2</h1>
-            <p class="subtitle">4단계 브랜드 로고의 정확한 색상을 맞춰보세요!</p>
-            <div class="game-info">
-                <div class="stage-preview">
-                    <div class="stage-item">
-                        <span class="stage-number">1</span>
-                        <span class="stage-brand">요즘IT</span>
-                        <span class="stage-colors">보라색 + 검은색</span>
-                    </div>
-                    <div class="stage-item">
-                        <span class="stage-number">2</span>
-                        <span class="stage-brand">카카오임팩트</span>
-                        <span class="stage-colors">노란색 + 회색</span>
-                    </div>
-                    <div class="stage-item">
-                        <span class="stage-number">3</span>
-                        <span class="stage-brand">제이펍</span>
-                        <span class="stage-colors">연두색 + 회색</span>
-                    </div>
-                    <div class="stage-item final">
-                        <span class="stage-number">4</span>
-                        <span class="stage-brand">다바코단</span>
-                        <span class="stage-colors">회색 (파이널)</span>
+        <div id="startScreen" class="screen active hero-screen">
+            <!-- 리더보드 버튼 - 오른쪽 상단 -->
+            <button id="leaderboardBtn" class="btn btn-secondary leaderboard-corner-btn">리더보드</button>
+            
+            <!-- 헤더 섹션 -->
+            <div class="hero-header">
+                <h1 class="title">모두콘 게임 V2</h1>
+                <p class="subtitle">4단계 브랜드 로고의 정확한 색상을 맞춰보세요!</p>
+            </div>
+            
+            <!-- 메인 섹션 - 스테이지 그리드 -->
+            <div class="hero-main">
+                <div class="game-info">
+                    <div class="stage-grid-container">
+                        <div class="stage-preview-grid">
+                            <div class="stage-item stage-1" data-stage="1">
+                                <span class="stage-number">1</span>
+                                <div class="stage-main-content">
+                                    <div class="stage-logo">
+                                        <img src="assets/logos/1%EB%8B%A8%EA%B3%84%20%EC%9A%94%EC%A6%98%20it.png" alt="요즘IT 로고" class="stage-logo-img">
+                                    </div>
+                                    <span class="stage-brand">요즘IT</span>
+                                </div>
+                            </div>
+                            <div class="stage-item stage-2" data-stage="2">
+                                <span class="stage-number">2</span>
+                                <div class="stage-main-content">
+                                    <div class="stage-logo">
+                                        <img src="assets/logos/2%EB%8B%A8%EA%B3%84%20%EC%B9%B4%EC%B9%B4%EC%98%A4%EC%9E%84%ED%8C%A9%ED%8A%B8.png" alt="카카오임팩트 로고" class="stage-logo-img">
+                                    </div>
+                                    <span class="stage-brand">카카오임팩트</span>
+                                </div>
+                            </div>
+                            <div class="stage-item stage-3" data-stage="3">
+                                <span class="stage-number">3</span>
+                                <div class="stage-main-content">
+                                    <div class="stage-logo">
+                                        <img src="assets/logos/3%EB%8B%A8%EA%B3%84%20%EC%A0%9C%EC%9D%B4%ED%8E%8D%20%EB%A1%9C%EA%B3%A0.png" alt="제이펍 로고" class="stage-logo-img">
+                                    </div>
+                                    <span class="stage-brand">제이펍</span>
+                                </div>
+                            </div>
+                            <div class="stage-item stage-4 final" data-stage="4">
+                                <span class="stage-badge">FINAL</span>
+                                <span class="stage-number">4</span>
+                                <div class="stage-main-content">
+                                    <div class="stage-logo">
+                                        <img src="assets/logos/4%EB%8B%A8%EA%B3%84%20%EB%8B%A4%EB%B0%94%EC%BD%94%EB%8B%A8.png" alt="다바코단 로고" class="stage-logo-img">
+                                    </div>
+                                    <span class="stage-brand">다바코단</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <button id="startBtn" class="btn btn-primary">게임 시작</button>
-            <button id="leaderboardBtn" class="btn btn-secondary">리더보드</button>
+            
+            <!-- 액션 섹션 - 버튼 -->
+            <div class="hero-actions">
+                <button id="startBtn" class="btn btn-primary btn-hero">
+                    <span class="btn-text">게임 시작</span>
+                    <span class="btn-icon">▶</span>
+                </button>
+            </div>
         </div>
 
         <!-- 게임 화면 -->

@@ -119,7 +119,7 @@ body::before {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 24px;
+    border-radius: 19px;
     padding: 40px;
     box-shadow: 
         0 8px 32px 0 rgba(0, 0, 0, 0.08),
@@ -160,6 +160,11 @@ body::before {
     display: block;
 }
 
+/* 화면 전환을 위한 강제 숨김 규칙 */
+.screen:not(.active) {
+    display: none !important;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -197,20 +202,93 @@ body::before {
     display: none;
 }
 
+/* 히어로 화면 - 한 화면 완전 표시 */
+.hero-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 1vh 2vw;
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+/* 헤더 섹션 - 압축 */
+.hero-header {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 2vh 0 1vh 0;
+    animation: fadeInDown 0.8s ease;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 메인 섹션 - 최소 여백 */
+.hero-main {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vh 0;
+}
+
+/* 리더보드 버튼 - 오른쪽 상단 모서리 */
+.leaderboard-corner-btn {
+    position: absolute !important;
+    top: 1vh !important;
+    right: 1vw !important;
+    left: auto !important;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #2c3e50 !important;
+    border: 1px solid rgba(44, 62, 80, 0.2) !important;
+    padding: 3px 10px !important;
+    font-size: 0.8rem !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.leaderboard-corner-btn:hover {
+    background: rgba(44, 62, 80, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 액션 섹션 - 최소화 */
+.hero-actions {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 2vh 0 1vh 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vh;
+}
+
 /* 시작 화면 */
 .title {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     color: #2c3e50;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 1vh;
     font-weight: 800;
     position: relative;
     z-index: 2;
-    animation: titleGlow 4s ease-in-out infinite alternate;
-    letter-spacing: 2px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     cursor: default;
-    transition: all 0.3s ease;
 }
 
 .title:hover {
@@ -232,11 +310,10 @@ body::before {
 .subtitle {
     text-align: center;
     color: #5a6c7d;
-    font-size: 1.3rem;
-    margin-bottom: 40px;
+    font-size: 1.1rem;
+    margin-bottom: 1.5vh;
     font-weight: 400;
-    letter-spacing: 0.5px;
-    animation: subtitleFloat 3s ease-in-out infinite alternate;
+    letter-spacing: 0.3px;
     z-index: 2;
     position: relative;
 }
@@ -253,17 +330,17 @@ body::before {
 }
 
 .game-info {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 30px;
-    border-radius: 20px;
-    margin-bottom: 40px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 2vh 3vw;
+    border-radius: 19px;
     box-shadow: 
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
-        0 4px 16px 0 rgba(0, 0, 0, 0.06);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
+        0 4px 16px 0 rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 95vw;
 }
 
 .game-info:hover {
@@ -273,32 +350,71 @@ body::before {
         0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
-.stage-preview {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+/* 스테이지 그리드 컨테이너 */
+.stage-grid-container {
+    position: relative;
+    width: 100%;
 }
 
+/* 2x2 고정 그리드 - 가로 확대 */
+.stage-preview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2.5vw;
+    max-width: 85vw;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.5vh 1vw;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+/* 각 스테이지 위치 고정 - 명시적 지정 */
+.stage-item:nth-child(1) { 
+    grid-area: 1 / 1 / 2 / 2;
+} /* 요즘IT */
+.stage-item:nth-child(2) { 
+    grid-area: 1 / 2 / 2 / 3;
+} /* 카카오임팩트 */
+.stage-item:nth-child(3) { 
+    grid-area: 2 / 1 / 3 / 2;
+} /* 제이퍼 */
+.stage-item:nth-child(4) { 
+    grid-area: 2 / 2 / 3 / 3;
+    display: flex !important;
+    opacity: 1 !important;
+    animation: none !important;
+    transform: translateY(0) !important;
+} /* 다바코단 - 강제 표시 */
+
 .stage-item {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    padding: 25px;
-    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    padding: 1vh 1vw;
+    border-radius: 19px;
     text-align: center;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     opacity: 0;
     transform: translateY(30px);
     animation: staggeredFadeIn 0.6s ease forwards;
+    height: 26vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
 }
 
 .stage-item:nth-child(1) { animation-delay: 0.1s; }
 .stage-item:nth-child(2) { animation-delay: 0.2s; }
 .stage-item:nth-child(3) { animation-delay: 0.3s; }
 .stage-item:nth-child(4) { animation-delay: 0.4s; }
+
 
 @keyframes staggeredFadeIn {
     from {
@@ -311,36 +427,45 @@ body::before {
     }
 }
 
-.stage-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transition: left 0.5s ease;
-}
 
-.stage-item:hover {
-    transform: translateY(-8px) rotateX(5deg);
-    box-shadow: 
-        0 15px 35px rgba(0, 0, 0, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    border-color: rgba(0, 0, 0, 0.15);
-}
 
-.stage-item:hover::before {
-    left: 100%;
-}
 
 .stage-item.final {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 237, 78, 0.2) 100%);
-    border: 1px solid rgba(255, 215, 0, 0.3);
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 237, 78, 0.1) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.3);
     box-shadow: 
         0 8px 32px 0 rgba(255, 215, 0, 0.2),
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+        0 0 25px rgba(255, 215, 0, 0.1);
 }
+
+
+/* FINAL 배지 */
+.stage-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: linear-gradient(135deg, #FFD700, #FFA000);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+    animation: badgePulse 2s ease-in-out infinite;
+    z-index: 10;
+}
+
+@keyframes badgePulse {
+    0%, 100% {
+        transform: scale(1) rotate(-5deg);
+    }
+    50% {
+        transform: scale(1.1) rotate(-5deg);
+    }
+}
+
 
 .stage-item.final:hover {
     box-shadow: 
@@ -351,44 +476,134 @@ body::before {
 
 .stage-number {
     display: block;
-    font-size: 2.2rem;
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 12px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.stage-item:hover .stage-number {
-    transform: scale(1.1) rotate(5deg);
-}
-
-.stage-brand {
-    display: block;
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #34495e;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    transition: color 0.3s ease;
-}
-
-.stage-item:hover .stage-brand {
-    color: #2c3e50;
-}
-
-.stage-colors {
-    display: block;
     font-size: 1rem;
-    color: #7f8c8d;
-    font-weight: 400;
-    letter-spacing: 0.3px;
-    transition: color 0.3s ease;
+    font-weight: 500;
+    color: #95a5a6;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+    align-self: flex-start;
 }
 
-.stage-item:hover .stage-colors {
+
+/* 브랜드명 - 25% 차지 */
+.stage-brand {
+    flex: 0 0 25%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1rem;
+    font-weight: 600;
     color: #5a6c7d;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    line-height: 1.3;
+    text-align: left;
 }
+
+/* 요즘IT 브랜드명 크기 및 위치 조정 */
+.stage-1 .stage-brand {
+    font-size: 1.1rem;
+    transform: translateX(3%);
+}
+
+/* 카카오임팩트 브랜드명 위치 조정 */
+.stage-2 .stage-brand {
+    transform: translateX(-5%);
+}
+
+
+/* 메인 콘텐츠 영역 - 로고 + 브랜드명 */
+.stage-main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 1vw;
+}
+
+/* 스테이지 로고 스타일 - 75% 차지 */
+.stage-logo {
+    flex: 0 0 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vh 0.5vw;
+}
+
+.stage-logo-img {
+    max-width: 80%;
+    max-height: 15vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.2));
+    display: block;
+    margin: 0 auto;
+}
+
+/* 1,2번 로고 크기 명시적 지정 */
+.stage-1 .stage-logo-img {
+    max-width: 78%;
+    max-height: 14.7vh;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    top: -6%;
+}
+
+.stage-2 .stage-logo-img {
+    max-width: 80%;
+    max-height: 15vh;
+    margin: 0 auto;
+    display: block;
+}
+
+/* 3번 제이펍 로고 - 큰 파일 크기 보정 */
+.stage-3 .stage-logo {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100% !important;
+    position: relative;
+}
+
+.stage-3 .stage-logo-img {
+    max-width: 108% !important;
+    max-height: 21.6vh !important;
+    width: auto;
+    height: auto;
+    margin: 0;
+    display: block;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+}
+
+/* 다바코단 로고 크기 확대 및 중앙 정렬 */
+.stage-4 .stage-logo {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100% !important;
+    position: relative;
+}
+
+.stage-4 .stage-logo-img {
+    max-width: 135.85% !important;
+    max-height: 28.6vh !important;
+    width: auto;
+    height: auto;
+    margin: 0;
+    display: block;
+    position: absolute;
+    top: 37%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+}
+
 
 /* 버튼 스타일 */
 .btn {
@@ -422,6 +637,75 @@ body::before {
 
 .btn:hover::before {
     left: 100%;
+}
+
+/* 히어로 버튼 스타일 */
+.btn-hero {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    padding: 12px 40px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 40px;
+    box-shadow: 
+        0 4px 16px rgba(44, 62, 80, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid #2c3e50;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-hero:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 15px 40px rgba(44, 62, 80, 0.5),
+        0 0 80px rgba(44, 62, 80, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, #1e2a36 0%, #2c3e50 100%);
+}
+
+.btn-hero:hover::before {
+    left: 100%;
+}
+
+.btn-hero:hover .btn-icon {
+    transform: translateX(5px);
+}
+
+.btn-icon {
+    transition: transform 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.btn-sub {
+    background: rgba(255, 255, 255, 0.9);
+    color: #5a6c7d;
+    padding: 8px 24px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+
+.btn-sub:hover {
+    background: rgba(255, 255, 255, 1);
+    color: #2c3e50;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary {
@@ -1055,10 +1339,82 @@ body::before {
         padding: 20px;
     }
     
+    /* 히어로 화면 반응형 */
+    .hero-screen {
+        min-height: calc(100vh - 40px);
+        padding: 20px;
+    }
+    
+    .hero-header {
+        padding: 10px 0;
+    }
+    
+    .hero-main {
+        padding: 20px 0;
+    }
+    
+    .hero-actions {
+        padding: 20px 0;
+        gap: 12px;
+    }
+    
     .title {
         font-size: 2.5rem;
     }
     
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    /* 스테이지 그리드 반응형 */
+    .stage-preview-grid {
+        gap: 15px;
+        max-width: 100%;
+    }
+    
+    .stage-item {
+        padding: 20px;
+        min-height: 140px;
+        font-size: 0.9rem;
+    }
+    
+    .stage-number {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+    }
+    
+    .stage-brand {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+    
+    .stage-colors {
+        font-size: 0.85rem;
+    }
+    
+    /* 버튼 반응형 */
+    .btn-hero {
+        padding: 16px 40px;
+        font-size: 1.2rem;
+        width: 90%;
+        max-width: 300px;
+    }
+    
+    .btn-sub {
+        padding: 10px 24px;
+        font-size: 0.95rem;
+    }
+    
+    
+    /* FINAL 배지 반응형 */
+    .stage-badge {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+        top: -8px;
+        right: -8px;
+    }
+    
+    /* 게임 화면 반응형 */
     .logo-container {
         width: 100%;
         max-width: 450px;
@@ -1080,10 +1436,6 @@ body::before {
         grid-template-columns: 1fr;
     }
     
-    .stage-preview {
-        grid-template-columns: 1fr;
-    }
-    
     .leaderboard-item {
         grid-template-columns: 40px 1fr 80px;
         font-size: 0.9rem;
@@ -1095,5 +1447,60 @@ body::before {
     
     .countdown-number {
         font-size: 6rem;
+    }
+}
+
+/* 모바일 세로 모드 */
+@media (max-width: 480px) {
+    .hero-screen {
+        padding: 15px;
+    }
+    
+    .title {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+    
+    /* 세로 1열 배치 */
+    .stage-preview-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+        gap: 12px;
+    }
+    
+    .stage-1,
+    .stage-2,
+    .stage-3,
+    .stage-4 {
+        grid-area: auto;
+    }
+    
+    .stage-item {
+        aspect-ratio: 16/9;
+        min-height: 120px;
+        padding: 15px;
+    }
+    
+    .stage-number {
+        font-size: 1.5rem;
+    }
+    
+    .stage-brand {
+        font-size: 1rem;
+    }
+    
+    .btn-hero {
+        padding: 14px 30px;
+        font-size: 1.1rem;
+        width: 100%;
+    }
+    
+    .btn-icon {
+        font-size: 1rem;
     }
 }

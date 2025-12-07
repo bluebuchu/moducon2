@@ -267,7 +267,7 @@ function startStage() {
     // UI 업데이트
     gameElements.currentStage.textContent = `Stage ${currentBrand.stage}/4`;
     gameElements.stageBrand.textContent = currentBrand.name;
-    gameElements.logoImage.src = currentBrand.logoFile;
+    gameElements.logoImage.src = encodeURI(currentBrand.logoFile);
     
     if (currentBrand.isFinal) {
         gameElements.logoDescription.textContent = `파이널 라운드! ${currentBrand.name} 로고의 색상을 맞춰보세요`;
