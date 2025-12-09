@@ -310,7 +310,7 @@ function startColorMatching() {
 }
 
 function generateColorOptions(targetColor) {
-    const similarColors = generateSimilarColors(targetColor, 3);
+    const similarColors = generateSimilarColors(targetColor, 5);
     const allOptions = [targetColor.hex, ...similarColors];
     const shuffledOptions = shuffleArray(allOptions);
     
@@ -340,7 +340,7 @@ function regenerateColorOptions(targetColor) {
     gameElements.colorOptions.innerHTML = '';
     
     // 새로운 유사색상 생성 (이전과 다르게)
-    const similarColors = generateSimilarColors(targetColor, 3);
+    const similarColors = generateSimilarColors(targetColor, 5);
     const allOptions = [targetColor.hex, ...similarColors];
     const shuffledOptions = shuffleArray(allOptions);
     
@@ -400,7 +400,7 @@ function selectColorOption(selectedOption, targetColor) {
         }, 1500);
         
     } else {
-        // 틀렸을 경우 - 선택한 옵션에만 X 표시하고 새로운 4개 옵션 생성
+        // 틀렸을 경우 - 선택한 옵션에만 X 표시하고 새로운 6개 옵션 생성
         selectedOption.classList.add('wrong');
         selectedOption.style.pointerEvents = 'none';
         
@@ -409,7 +409,7 @@ function selectColorOption(selectedOption, targetColor) {
         xMark.textContent = '✗';
         selectedOption.appendChild(xMark);
         
-        // 1.5초 후 새로운 4개 옵션 생성
+        // 1.5초 후 새로운 6개 옵션 생성
         setTimeout(() => {
             regenerateColorOptions(targetColor);
         }, 1500);

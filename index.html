@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>모두콘 게임 V2</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=9rightfix">
 </head>
 <body>
     <!-- 떠다니는 색상 구체들 -->
@@ -98,33 +98,39 @@
                 </div>
             </div>
             
-            <!-- 대형 로고 표시 영역 -->
-            <div class="logo-display-area">
-                <div class="logo-container">
-                    <img id="logoImage" src="" alt="Brand Logo">
-                </div>
-                <div class="logo-info">
-                    <p id="logoDescription">위 로고의 색상을 정확히 맞춰보세요</p>
-                </div>
-            </div>
-            
-            <!-- 색상 맞추기 영역 -->
-            <div class="color-matching-area">
-                <div class="target-colors">
-                    <h3>맞춰야 할 색상:</h3>
-                    <div id="targetColorsList"></div>
+            <!-- 가로형 게임 레이아웃 -->
+            <div class="game-content-horizontal">
+                <!-- 대형 로고 표시 영역 (40%) -->
+                <div class="logo-display-area">
+                    <div class="logo-container">
+                        <img id="logoImage" src="" alt="Brand Logo">
+                    </div>
+                    <div class="logo-info">
+                        <p id="logoDescription">위 로고의 색상을 정확히 맞춰보세요</p>
+                    </div>
                 </div>
                 
-                <div class="current-color-section">
-                    <h3 id="currentColorTitle">색상 1 맞추기</h3>
-                    <p class="selection-instruction">아래 4개 색상 중 정답을 선택하세요</p>
-                    
-                    <div class="color-options">
-                        <!-- 4개 색상 옵션이 동적으로 생성됩니다 -->
+                <!-- 맞춰야 할 색상 표시 영역 (20%) -->
+                <div class="target-colors-area">
+                    <div class="target-colors">
+                        <h3>맞춰야 할 색상:</h3>
+                        <div id="targetColorsList"></div>
                     </div>
-                    
-                    <div class="action-buttons">
-                        <p class="challenge-message">정답을 맞출 때까지 계속 도전하세요!</p>
+                </div>
+                
+                <!-- 색상 선택 영역 (40%) -->
+                <div class="color-selection-area">
+                    <div class="current-color-section">
+                        <h3 id="currentColorTitle">색상 1 맞추기</h3>
+                        <p class="selection-instruction">아래 6개 색상 중 정답을 선택하세요</p>
+                        
+                        <div class="color-options">
+                            <!-- 6개 색상 옵션이 동적으로 생성됩니다 -->
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <p class="challenge-message">정답을 맞출 때까지 계속 도전하세요!</p>
+                        </div>
                     </div>
                 </div>
             </div>
